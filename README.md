@@ -9,7 +9,7 @@ To install this example on your computer, clone the repository and install
 dependencies.
 
 ```bash
-$ git clone git@github.com:passport/express-4.x-local-example.git
+$ git clone http://github.com/passport/express-4.x-local-example.git
 $ cd express-4.x-local-example
 $ npm install
 ```
