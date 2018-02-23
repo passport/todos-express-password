@@ -24,3 +24,9 @@ Open a web browser and navigate to [http://localhost:3000/](http://127.0.0.1:300
 to see the example in action.  Log in using username `jack` and password `secret`.
 
 <a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/vK9dyjRnnWsMzzJTQ57fRJpH/passport/express-4.x-local-example'>  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/vK9dyjRnnWsMzzJTQ57fRJpH/passport/express-4.x-local-example.svg' /></a>
+
+### hebe diablo静态文件node服务
+
+### 新增pooh单页应用的node服务
+* pooh 运行npm run build 把dist下的pooh文件夹复制到views下
+* 启动应用访问http://localhost:3002/v2/d/home
