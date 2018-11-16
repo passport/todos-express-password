@@ -1,8 +1,11 @@
-var express = require('express');
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
-var db = require('./db');
+const path = require('path')
+const Koa = require('koa')
+const render = require('koa-ejs')
+const route = require('koa-route')
+const passport = require('koa-passport')
+const { Strategy } = require('passport-local')
 
+const db = require('./db')
 
 // Configure the local strategy for use by Passport.
 //
@@ -10,16 +13,20 @@ var db = require('./db');
 // (`username` and `password`) submitted by the user.  The function must verify
 // that the password is correct and then invoke `cb` with a user object, which
 // will be set at `req.user` in route handlers after authentication.
-passport.use(new Strategy(
-  function(username, password, cb) {
-    db.users.findByUsername(username, function(err, user) {
-      if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false); }
-      return cb(null, user);
-    });
-  }));
-
+passport.use(new Strategy(async (username, password, done) => {
+  try {
+    const user = await db.users.findByUsername(username)
+    if (!user) {
+      return done(null, false)
+    }
+    if (user.password != password) {
+      return done(null, false)
+    }
+    return done(null, user)
+  } catch (err) {
+    return done(err)
+  }
+}))
 
 // Configure Passport authenticated session persistence.
 //
@@ -28,66 +35,73 @@ passport.use(new Strategy(
 // typical implementation of this is as simple as supplying the user ID when
 // serializing, and querying the user record by ID from the database when
 // deserializing.
-passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
-});
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+})
 
-passport.deserializeUser(function(id, cb) {
-  db.users.findById(id, function (err, user) {
-    if (err) { return cb(err); }
-    cb(null, user);
-  });
-});
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await db.users.findById(id)
+    done(null, user)
+  } catch (err) {
+    done(err)
+  }
+})
 
-
-
-
-// Create a new Express application.
-var app = express();
+// Create a new Koa application.
+const app = new Koa()
 
 // Configure view engine to render EJS templates.
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+render(app, {
+  root: path.join(__dirname, 'views'),
+  layout: 'template',
+  viewExt: 'ejs',
+  cache: false,
+  debug: false
+})
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
-app.use(require('morgan')('combined'));
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(require('koa-logger')())
+app.use(require('koa-bodyparser')())
+app.keys = ['keyboard cat']
+app.use(require('koa-session')({}, app))
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Define routes.
-app.get('/',
-  function(req, res) {
-    res.render('home', { user: req.user });
-  });
+app.use(route.get('/', async ctx => {
+  await ctx.render('home', { user: ctx.req.user })
+}))
 
-app.get('/login',
-  function(req, res){
-    res.render('login');
-  });
+app.use(route.get('/login', async ctx => {
+  await ctx.render('login')
+}))
+
+app.use(route.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login'
+})))
   
-app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-  
-app.get('/logout',
-  function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
+app.use(route.get('/logout', async ctx => {
+  await ctx.logout()
+  ctx.redirect('/')
+}))
 
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
+// Require authentication for now
+app.use((ctx, next) => {
+  if (ctx.isAuthenticated()) {
+    return next()
+  } else {
+    ctx.redirect('/')
+  }
+})
 
-app.listen(3000);
+app.use(route.get('/profile', async ctx => {
+  await ctx.render('profile', { user: ctx.req.user })
+}))
+
+app.listen(3000)
