@@ -25,7 +25,7 @@ to see the example in action.  Log in using username `jack` and password `secret
 
 ### Brute-Force protection
 
-Here is example of protection against Brute-Force attacks with [rate-limiter-flexible]() package.
+Here is example of protection against Brute-Force attacks with [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) package.
 
 Start secure sever.
 
