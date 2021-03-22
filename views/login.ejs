@@ -1,13 +1,49 @@
-<form action="/login" method="post">
-	<div>
-	<label>Username:</label>
-	<input type="text" name="username"/><br/>
-	</div>
-	<div>
-	<label>Password:</label>
-	<input type="password" name="password"/>
-	</div>
-	<div>
-	<input type="submit" value="Submit"/>
-	</div>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <title>Log in example | Passport.js</title>
+    <meta name="description" content="Express 4.x app using Passport for authentication with username and password.">
+
+     <!-- Pico.css -->
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <style>
+      article div:nth-of-type(2) {
+        display: none;
+        background-color: #374956;
+        background-image: url("https://source.unsplash.com/N2q8hRVzEg8/1000x1200");
+        background-position: center;
+        background-size: cover;
+      }
+      @media (min-width: 992px) {
+        .grid > div:nth-of-type(2) {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <main class="container">
+      
+      <article class="grid">
+        <div>
+          <hgroup>
+            <h1>Login</h1>
+          </hgroup>
+          <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit" class="contrast">Login</button>
+          </form>
+        </div>
+        <div></div>
+      </article>
+    </main>
+
+  </body>
+
+</html>
