@@ -23,4 +23,21 @@ $ node server.js
 Open a web browser and navigate to [http://localhost:3000/](http://127.0.0.1:3000/)
 to see the example in action.  Log in using username `jack` and password `secret`.
 
+### Brute-Force protection
+
+Here is example of protection against Brute-Force attacks with [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) package.
+
+Start secure sever.
+
+```bash
+$ node server-secure.js
+```
+
+Open a web browser and navigate to [http://localhost:3000/](http://127.0.0.1:3000/)
+to see the example in action. Log in using username `jack` and password `secret`.
+
+Try to login with wrong credentials 11 times in a row, you'll see `429 Too Many Requests` response.
+It is blocked by username and IP pair for 1 hour.
+
+Login endpoint blocks requests by IP for 3 hours as well, if more than 100 failed attempts from single IP per day.
 
