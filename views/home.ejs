@@ -68,23 +68,67 @@
         margin-bottom: var(--spacing);
         line-height: 1.25;
       }
+      
+      
+      :root:not([data-theme=dark]), [data-theme=light] {
+          --nav-background: rgba(255, 255, 255, 0.7);
+          --nav-border: rgba(115, 130, 140, 0.2);
+      }
+
+      [data-theme=dark] {
+          --nav-background: rgba(16, 24, 30, 0.8);
+          --nav-border: rgba(115, 130, 140, 0.2);
+      }
+
+      body > nav {
+          z-index: 99;
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          backdrop-filter: saturate(180%) blur(20px);
+          background-color: var(--nav-background);
+          box-shadow: 0px 1px 0 var(--nav-border);
+      }
+      
+      .hero,
+      body>main {
+          padding-top: 100px;
+          x-padding-top: calc(1rem * var(--spacing-factor-xs) + 3.5rem);
+      }
+
+      @media (min-width: 576px) {
+        .hero,
+        body > main {
+          padding-top: 100px;
+          x-padding-top: calc(1rem * var(--spacing-factor-sm) + 3.5rem);
+        }
+      }
+
+      @media (min-width: 768px) {
+        .hero,
+        body > main {
+          padding-top: 100px;
+          x-padding-top: calc(1rem * var(--spacing-factor-md) + 3.5rem);
+        }
+      }
+
+      @media (min-width: 992px) {
+        .hero,
+        body > main {
+          padding-top: 100px;
+          x-padding-top: calc(1rem * var(--spacing-factor-lg) + 3.5rem);
+        }
+      }
     </style>
   </head>
 
   <body>
+    
+    <%- include('header'); -%>
 
     <!-- Hero -->
     <div class="hero" data-theme="dark">
-      <nav class="container-fluid">
-        <ul>
-          <li><a href="./" class="contrast" onclick="event.preventDefault()"><strong>Hello</strong></a></li>
-        </ul>
-        <ul>
-          <li><a href="#" class="contrast" data-theme-switcher="auto">Auto</a></li>
-          <li><a href="#" class="contrast" data-theme-switcher="light">Light</a></li>
-          <li><a href="#" class="contrast" data-theme-switcher="dark">Dark</a></li>
-        </ul>
-      </nav>
       <header class="container">
         <hgroup>
           <h1>Hello</h1>
