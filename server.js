@@ -3,6 +3,7 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var db = require('./db');
 
+var profileRouter = require('./routes/profile');
 var notificationsRouter = require('./routes/notifications');
 
 
@@ -68,6 +69,7 @@ app.get('/',
     res.render('home', { user: req.user });
   });
 
+app.use('/profile', profileRouter);
 app.use('/notifications', notificationsRouter);
 
 /*
@@ -92,12 +94,6 @@ app.get('/logout',
   function(req, res){
     req.logout();
     res.redirect('/');
-  });
-
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
   });
 
 app.listen(3000);
