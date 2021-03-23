@@ -1,5 +1,5 @@
 var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
+var Strategy = require('passport-local');
 var db = require('../db');
 
 
@@ -11,15 +11,14 @@ module.exports = function() {
   // (`username` and `password`) submitted by the user.  The function must verify
   // that the password is correct and then invoke `cb` with a user object, which
   // will be set at `req.user` in route handlers after authentication.
-  passport.use(new Strategy(
-    function(username, password, cb) {
-      db.users.findByUsername(username, function(err, user) {
-        if (err) { return cb(err); }
-        if (!user) { return cb(null, false); }
-        if (user.password != password) { return cb(null, false); }
-        return cb(null, user);
-      });
-    }));
+  passport.use(new Strategy(function(username, password, cb) {
+    db.users.findByUsername(username, function(err, user) {
+      if (err) { return cb(err); }
+      if (!user) { return cb(null, false); }
+      if (user.password != password) { return cb(null, false); }
+      return cb(null, user);
+    });
+  }));
 
 
   // Configure Passport authenticated session persistence.
