@@ -9,7 +9,6 @@ var notificationsRouter = require('./routes/notifications');
 
 
 
-
 // Create a new Express application.
 var app = express();
 
