@@ -11,8 +11,51 @@
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
     <style>
 main {
-  border: 1px solid yellow;
-}  
+  x-border: 1px solid yellow;
+} 
+
+:root:not([data-theme=dark]), [data-theme=light] {
+    --nav-background: rgba(255, 255, 255, 0.7);
+    --nav-border: rgba(115, 130, 140, 0.2);
+}
+
+[data-theme=dark] {
+    --nav-background: rgba(16, 24, 30, 0.8);
+    --nav-border: rgba(115, 130, 140, 0.2);
+}
+
+body > nav {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: var(--nav-background);
+    box-shadow: 0px 1px 0 var(--nav-border);
+}
+
+@media (min-width: 576px) {
+  body > main {
+    padding-top: calc(1rem * var(--spacing-factor-sm) + 3.5rem);
+  }
+}
+
+@media (min-width: 768px) {
+  body > main {
+    padding-top: calc(1rem * var(--spacing-factor-md) + 3.5rem);
+  }
+}
+
+@media (min-width: 992px) {
+  body > main {
+    padding-top: calc(1rem * var(--spacing-factor-lg) + 3.5rem);
+  }
+}
+
+body>main {
+    padding-top: calc(1rem * var(--spacing-factor-xs) + 3.5rem);
+}
     </style>
 
   </head>
