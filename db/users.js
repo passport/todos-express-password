@@ -19,25 +19,31 @@ var records = [ {
   }
 ];
 
-exports.findById = function(id, cb) {
+exports.find = function(query, cb) {
   process.nextTick(function() {
-    var idx = id - 1;
-    if (records[idx]) {
-      cb(null, records[idx]);
-    } else {
-      cb(new Error('User ' + id + ' does not exist'));
+    if (Object.keys(query) == 0) {
+      return cb(null, records);
     }
+    
+    var result = records.filter(function(record) {
+      return record.id === query.id;
+    });
+    return cb(null, result);
+  });
+};
+
+exports.findOne = function(query, cb) {
+  exports.find(query, function(err, result) {
+    if (err) { return cb(err); }
+    return cb(null, result[0]);
   });
 };
 
 exports.findByUsername = function(username, cb) {
   process.nextTick(function() {
-    for (var i = 0, len = records.length; i < len; i++) {
-      var record = records[i];
-      if (record.username === username) {
-        return cb(null, record);
-      }
-    }
-    return cb(null, null);
+    var result = records.find(function(record) {
+      return record.username === username;
+    });
+    return cb(null, result);
   });
 };

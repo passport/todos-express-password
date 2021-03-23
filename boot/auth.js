@@ -29,13 +29,14 @@ module.exports = function() {
   // serializing, and querying the user record by ID from the database when
   // deserializing.
   passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
+    process.nextTick(function() {
+      cb(null, { id: user.id, username: user.username });
+    });
   });
 
-  passport.deserializeUser(function(id, cb) {
-    db.users.findById(id, function (err, user) {
-      if (err) { return cb(err); }
-      cb(null, user);
+  passport.deserializeUser(function(user, cb) {
+    process.nextTick(function() {
+      return cb(null, user);
     });
   });
 
