@@ -3,6 +3,8 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var db = require('./db');
 
+var notificationsRouter = require('./routes/notifications');
+
 
 // Configure the local strategy for use by Passport.
 //
@@ -66,10 +68,14 @@ app.get('/',
     res.render('home', { user: req.user });
   });
 
+app.use('/notifications', notificationsRouter);
+
+/*
 app.get('/messages',
   function(req, res) {
     res.render('messages', { user: req.user });
   });
+*/
 
 app.get('/login',
   function(req, res){

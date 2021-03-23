@@ -65,13 +65,15 @@ body>main {
     <%- include('header'); -%>
     
     <main class="container">
-      <p>Messages</p>
-      <p>Messages</p>
-      <p>Messages</p>
-      <p>Messages</p>
-      <p>Messages</p>
-      
-      <p>Messages</p>
+      <% notifications.forEach(function(notification){ %>
+        <article>
+          <% if (notification.subject) { %>
+          <h4><%- notification.subject %></h4>
+          <% } %>
+          <p><%- notification.body %></p>
+        </article>
+        
+      <% }); %>
     </main>
     
   </body>
