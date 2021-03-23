@@ -1,3 +1,5 @@
+var crypto = require('crypto');
+
 var records = [ {
     id: 1,
     username: 'alice',
@@ -18,6 +20,18 @@ var records = [ {
     emails: [ { value: 'carol@example.com' } ]
   }
 ];
+
+var i, len
+  , salt, hashedPassword;
+for (i = 0, len = records.length; i < len; ++i) {
+  salt = crypto.randomBytes(16);
+  hashedPassword = crypto.pbkdf2Sync(records[i].password, salt, 10000, 32, 'sha256');
+  
+  records[i].hashedPassword = hashedPassword.toString('base64');
+  records[i].salt = salt.toString('base64');
+  delete records[i].password;
+}
+
 
 exports.find = function(query, cb) {
   process.nextTick(function() {
