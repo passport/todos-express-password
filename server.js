@@ -68,7 +68,7 @@ app.get('/',
 
 app.get('/messages',
   function(req, res) {
-    res.render('messages');
+    res.render('messages', { user: req.user });
   });
 
 app.get('/login',

@@ -2,6 +2,11 @@
       <ul>
         <li><a href="/"><strong>Hello</strong></a></li>
       </ul>
+<% if (!user) { %>
+      <ul>
+        <li><a href="/login" role="button" class="outline">Sign in</a></li>
+      </ul>
+<% } else { %>
       <ul>
         <li>
         <a href="/messages" class="secondary">
@@ -19,4 +24,5 @@
         </a>
         </li>
       </ul>
+<% } %>
     </nav>
