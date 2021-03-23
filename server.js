@@ -66,6 +66,11 @@ app.get('/',
     res.render('home', { user: req.user });
   });
 
+app.get('/messages',
+  function(req, res) {
+    res.render('messages');
+  });
+
 app.get('/login',
   function(req, res){
     res.render('login');
