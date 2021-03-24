@@ -1,5 +1,6 @@
 var passport = require('passport');
 var Strategy = require('passport-local');
+var crypto = require('crypto');
 var db = require('../db');
 
 
@@ -15,8 +16,14 @@ module.exports = function() {
     db.users.findByUsername(username, function(err, user) {
       if (err) { return cb(err); }
       if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false); }
-      return cb(null, user);
+      
+      crypto.pbkdf2(password, Buffer.from(user.salt, 'base64'), 10000, 32, 'sha256', function(err, hashedPassword) {
+        if (err) { return cb(err); }
+        if (!crypto.timingSafeEqual(Buffer.from(user.hashedPassword, 'base64'), hashedPassword)) {
+          return cb(null, false);
+        }
+        return cb(null, user);
+      });
     });
   }));
 
