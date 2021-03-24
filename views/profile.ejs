@@ -9,28 +9,93 @@
 
      <!-- Pico.css -->
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <style>
+main {
+  x-border: 1px solid yellow;
+} 
 
+:root:not([data-theme=dark]), [data-theme=light] {
+    --nav-background: rgba(255, 255, 255, 0.7);
+    --nav-border: rgba(115, 130, 140, 0.2);
+}
+
+[data-theme=dark] {
+    --nav-background: rgba(16, 24, 30, 0.8);
+    --nav-border: rgba(115, 130, 140, 0.2);
+}
+
+body > nav {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: var(--nav-background);
+    box-shadow: 0px 1px 0 var(--nav-border);
+}
+
+@media (min-width: 576px) {
+  body > main {
+    padding-top: calc(1rem * var(--spacing-factor-sm) + 3.5rem);
+  }
+}
+
+@media (min-width: 768px) {
+  body > main {
+    padding-top: calc(1rem * var(--spacing-factor-md) + 3.5rem);
+  }
+}
+
+@media (min-width: 992px) {
+  body > main {
+    padding-top: calc(1rem * var(--spacing-factor-lg) + 3.5rem);
+  }
+}
+
+body>main {
+    padding-top: calc(1rem * var(--spacing-factor-xs) + 3.5rem);
+}
+
+main .grid > * {
+  margin-bottom: var(--spacing);
+}
+@media (min-width: 992px) {
+  main .grid {
+    grid-column-gap: var(--spacing);
+    grid-template-columns: 25% auto;
+  }
+}
+    </style>
   </head>
 
   <body>
-    <header>
-      <hgroup>
-        <h1>Hello</h1>
-      </hgroup>
-    </header>
+    <%- include('header'); -%>
 
     <main class="container">
 
-<p>
-ID: <%= user.id %><br/>
-Username: <%= user.username %><br/>
-Name: <%= user.displayName %><br/>
-<% if (user.emails) { %>
-Email: <%= user.emails[0].value %><br/>
-<% } %>
-</p>
-<a href="/logout">Log out</a>
+      <div class="grid">
 
+        <div>
+          <img src="/images/woman.png" width="128" height="128"/>
+        </div>
+
+        <div>
+          <hgroup>
+            <h4><%= user.displayName %></h4>
+            <p><small><%= user.username %></small></p>
+          </hgroup>
+            
+          <% if (user.emails) { %>
+          <p><small>Email: </small><%= user.emails[0].value %></p>
+          <% } %>
+          <p>
+            <small>Email </small><%= user.emails[0].value %><br/>
+            <small>Email </small><%= user.emails[0].value %>
+          </p>
+        </div>
+
+      </div>
     </main>
 
   </body>
