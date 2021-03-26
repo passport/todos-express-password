@@ -20,17 +20,6 @@ main {
     --nav-border: rgba(115, 130, 140, 0.2);
 }
 
-body > nav {
-    z-index: 99;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    backdrop-filter: saturate(180%) blur(20px);
-    background-color: var(--nav-background);
-    box-shadow: 0px 1px 0 var(--nav-border);
-}
-
 @media (min-width: 576px) {
   body > main {
     padding-top: calc(1rem * var(--spacing-factor-sm) + 3.5rem);
@@ -72,9 +61,9 @@ main .grid > * {
 
       <div class="grid">
 
-        <div>
+        <figure>
           <img src="/images/woman.png" width="128" height="128"/>
-        </div>
+        </figure>
 
         <div>
           <hgroup>

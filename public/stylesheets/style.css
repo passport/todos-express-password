@@ -1,0 +1,11 @@
+body > nav {
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  backdrop-filter: saturate(180%) blur(20px);
+  background-color: var(--nav-background);
+  box-shadow: 0px 1px 0 var(--nav-border)
+}
