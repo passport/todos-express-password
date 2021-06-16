@@ -1,7 +1,7 @@
 {
   "name": "express-4.x-local-example",
   "version": "0.0.0",
-  "description": "Express 4.x app using Passport for authentication with username and password.",
+  "description": "Express 4.x app using Passport for sign in with username and password.",
   "keywords": [
     "example",
     "express",
@@ -16,6 +16,9 @@
   },
   "bugs": {
     "url": "https://github.com/passport/express-4.x-local-example/issues"
+  },
+  "scripts": {
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
