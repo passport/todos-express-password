@@ -1,10 +1,10 @@
 var express = require('express');
-var db = require('../db');
 var crypto = require('crypto');
+var db = require('../db');
 
 var router = express.Router();
 
-router.get('/new', function(req, res) {
+router.get('/new', function(req, res, next) {
   res.render('signup');
 });
 
