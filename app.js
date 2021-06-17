@@ -4,7 +4,7 @@ var path = require('path');
 var logger = require('morgan');
 
 var authRouter = require('./routes/auth');
-var profileRouter = require('./routes/profile');
+var myaccountRouter = require('./routes/myaccount');
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -35,7 +35,7 @@ app.get('/',
   });
 
 app.use('/', authRouter);
-app.use('/profile', profileRouter);
+app.use('/myaccount', myaccountRouter);
 app.use('/users', usersRouter);
 
 module.exports = app;
