@@ -17,9 +17,9 @@ module.exports = function() {
       if (err) { return cb(err); }
       if (!row) { return cb(null, false); }
       
-      crypto.pbkdf2(password, Buffer.from(row.salt, 'base64'), 10000, 32, 'sha256', function(err, hashedPassword) {
+      crypto.pbkdf2(password, row.salt, 10000, 32, 'sha256', function(err, hashedPassword) {
         if (err) { return cb(err); }
-        if (!crypto.timingSafeEqual(Buffer.from(row.hashed_password, 'base64'), hashedPassword)) {
+        if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
           return cb(null, false);
         }
         

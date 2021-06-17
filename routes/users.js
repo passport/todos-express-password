@@ -18,8 +18,8 @@ router.post('/', function(req, res, next) {
     
     db.run('INSERT INTO users (username, hashed_password, salt, name) VALUES (?, ?, ?, ?)', [
       req.body.username,
-      hashedPassword.toString('base64'),
-      salt.toString('base64'),
+      hashedPassword,
+      salt,
       req.body.name
     ]);
     
