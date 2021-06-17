@@ -1,5 +1,5 @@
 var sqlite3 = require('sqlite3').verbose();
-var db = require('../db').db;
+var db = require('../db');
 
 
 module.exports = function() {

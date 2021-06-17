@@ -1,5 +1,5 @@
 var express = require('express');
-var db = require('../db').db;
+var db = require('../db');
 var crypto = require('crypto');
 
 var router = express.Router();

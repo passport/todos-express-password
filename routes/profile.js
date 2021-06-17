@@ -6,7 +6,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', ensureLoggedIn(), function(req, res, next) {
-  db.db.get('SELECT rowid AS id, username, name FROM users WHERE rowid = ?', [ req.user.id ], function(err, row) {
+  db.get('SELECT rowid AS id, username, name FROM users WHERE rowid = ?', [ req.user.id ], function(err, row) {
     if (err) { return next(err); }
     
     // TODO: Handle undefined row.

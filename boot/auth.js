@@ -13,7 +13,7 @@ module.exports = function() {
   // that the password is correct and then invoke `cb` with a user object, which
   // will be set at `req.user` in route handlers after authentication.
   passport.use(new Strategy(function(username, password, cb) {
-    db.db.get('SELECT rowid AS id, * FROM users WHERE username = ?', [ username ], function(err, row) {
+    db.get('SELECT rowid AS id, * FROM users WHERE username = ?', [ username ], function(err, row) {
       if (err) { return cb(err); }
       if (!row) { return cb(null, false); }
       
