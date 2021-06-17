@@ -3,6 +3,7 @@ var passport = require('passport');
 var path = require('path');
 var logger = require('morgan');
 
+var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var myaccountRouter = require('./routes/myaccount');
 var usersRouter = require('./routes/users');
@@ -29,11 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Define routes.
-app.get('/',
-  function(req, res) {
-    res.render('home', { user: req.user });
-  });
-
+app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/myaccount', myaccountRouter);
 app.use('/users', usersRouter);
