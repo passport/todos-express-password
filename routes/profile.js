@@ -6,9 +6,17 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', ensureLoggedIn(), function(req, res, next) {
-  db.users.findOne({ id: req.user.id }, function (err, record) {
+  db.db.get('SELECT rowid AS id, username, name FROM users WHERE rowid = ?', [ req.user.id ], function(err, row) {
     if (err) { return next(err); }
-    res.render('profile', { user: record });
+    
+    // TODO: Handle undefined row.
+    
+    var user = {
+      id: row.id.toString(),
+      username: row.username,
+      displayName: row.name
+    };
+    res.render('profile', { user: user });
   });
 });
 
