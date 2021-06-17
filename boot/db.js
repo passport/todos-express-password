@@ -1,11 +1,9 @@
-var sqlite3 = require('sqlite3').verbose();
 var db = require('../db');
 
 
 module.exports = function() {
 
   db.serialize(function() {
-    db.run("CREATE TABLE IF NOT EXISTS lorem (info TEXT)");
     db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, hashed_password BLOB, salt BLOB, name TEXT)");
 
     /*
