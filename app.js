@@ -6,7 +6,6 @@ var logger = require('morgan');
 var authRouter = require('./routes/auth');
 var profileRouter = require('./routes/profile');
 var usersRouter = require('./routes/users');
-var notificationsRouter = require('./routes/notifications');
 
 var app = express();
 
@@ -38,6 +37,5 @@ app.get('/',
 app.use('/', authRouter);
 app.use('/profile', profileRouter);
 app.use('/users', usersRouter);
-app.use('/notifications', notificationsRouter);
 
 module.exports = app;
