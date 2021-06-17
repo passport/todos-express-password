@@ -13,15 +13,21 @@ module.exports = function() {
   // that the password is correct and then invoke `cb` with a user object, which
   // will be set at `req.user` in route handlers after authentication.
   passport.use(new Strategy(function(username, password, cb) {
-    db.users.findByUsername(username, function(err, user) {
+    db.db.get('SELECT rowid AS id, * FROM users WHERE username = ?', [ username ], function(err, row) {
       if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
+      if (!row) { return cb(null, false); }
       
-      crypto.pbkdf2(password, Buffer.from(user.salt, 'base64'), 10000, 32, 'sha256', function(err, hashedPassword) {
+      crypto.pbkdf2(password, Buffer.from(row.salt, 'base64'), 10000, 32, 'sha256', function(err, hashedPassword) {
         if (err) { return cb(err); }
-        if (!crypto.timingSafeEqual(Buffer.from(user.hashedPassword, 'base64'), hashedPassword)) {
+        if (!crypto.timingSafeEqual(Buffer.from(row.hashed_password, 'base64'), hashedPassword)) {
           return cb(null, false);
         }
+        
+        var user = {
+          id: row.id.toString(),
+          username: row.username,
+          displayName: row.name
+        };
         return cb(null, user);
       });
     });

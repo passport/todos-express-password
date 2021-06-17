@@ -9,10 +9,6 @@ router.get('/new', function(req, res) {
 });
 
 router.post('/', function(req, res, next) {
-  //res.redirect('/');
-  
-  console.log('CREATE USER!');
-  console.log(req.body)
   
   var salt = crypto.randomBytes(16);
   //var hashedPassword = crypto.pbkdf2Sync(records[i].password, salt, 10000, 32, 'sha256');
@@ -20,9 +16,10 @@ router.post('/', function(req, res, next) {
   crypto.pbkdf2(req.body.password, salt, 10000, 32, 'sha256', function(err, hashedPassword) {
     if (err) { return next(err); }
     
-    db.run('INSERT INTO users (username, password, name) VALUES (?, ?, ?)', [
+    db.run('INSERT INTO users (username, hashed_password, salt, name) VALUES (?, ?, ?, ?)', [
       req.body.username,
       hashedPassword.toString('base64'),
+      salt.toString('base64'),
       req.body.name
     ]);
     

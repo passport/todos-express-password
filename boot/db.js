@@ -6,7 +6,7 @@ module.exports = function() {
 
   db.serialize(function() {
     db.run("CREATE TABLE IF NOT EXISTS lorem (info TEXT)");
-    db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, name TEXT)");
+    db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, hashed_password TEXT, salt TEXT, name TEXT)");
 
     /*
     var stmt = db.prepare("INSERT INTO lorem VALUES (?)");
