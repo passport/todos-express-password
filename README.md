@@ -46,6 +46,17 @@ Added to the scaffolding are files which add authentication to the application.
 
   This file initializes the database by creating the tables used to store user
   accounts and credentials.
+  
+* [`boot/auth.js`](boot/auth.js)
+
+  This file initializes Passport.  It configures the password strategy with a
+  `verify` callback.  This callback verifies the password by finding the user
+  account in the database.  If the account is found, the callback hashes the
+  password entered and compares it to the hashed password stored in the
+  database.  If the comparison is equal, the user is authenticated.
+  
+  This file also supplies the serialization functions used for session
+  management.
 
 * [`routes/auth.js`](routes/auth.js)
 
