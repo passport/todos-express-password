@@ -50,7 +50,7 @@ Added to the scaffolding are files which add authentication to the application.
 * [`boot/auth.js`](boot/auth.js)
 
   This file initializes Passport.  It configures the password strategy with a
-  `verify` callback.  This callback verifies the password by finding the user
+  `verify` callback.  The callback verifies the password by finding the user
   account in the database.  If the account is found, the callback hashes the
   password entered and compares it to the hashed password stored in the
   database.  If the comparison is equal, the user is authenticated.
@@ -60,17 +60,17 @@ Added to the scaffolding are files which add authentication to the application.
 
 * [`routes/auth.js`](routes/auth.js)
 
-  This file defines the routes used for authentication.  In particular, there are
-  two routes used to authenticate with a username and password:
+  This file defines the routes used for authentication.  In particular, there
+  are two routes used to authenticate with a username and password:
   
   - `GET /login`
   
-  This route renders a page that prompts the user to enter their username and
-  password.
+    This route renders a page that prompts the user to enter their username and
+    password.
   
   - `POST /login/password`
   
-  This route authenticates the user using their username and password.
+    This route authenticates the user using their username and password.
 
 * [`routes/users.js`](routes/auth.js)
 
@@ -79,14 +79,14 @@ Added to the scaffolding are files which add authentication to the application.
   
   - `GET /users/new`
   
-  This route renders a page that prompts the user to enter the information
-  needed to register an acccount.  This information consists of their name,
-  preferred username, and password.
+    This route renders a page that prompts the user to enter the information
+    needed to register an acccount.  This information consists of their name,
+    preferred username, and password.
   
   - `POST /users`
   
-  This route creates a new account using the information entered by the user.
-  The password is first hashed and stored in hashed format.
+    This route creates a new account using the information entered by the user.
+    The password is first hashed and stored in hashed format.
 
 ## License
 
