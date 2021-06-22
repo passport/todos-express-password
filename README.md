@@ -72,6 +72,22 @@ Added to the scaffolding are files which add authentication to the application.
   
   This route authenticates the user using their username and password.
 
+* [`routes/users.js`](routes/auth.js)
+
+  This file defines the routes used for registration.  In particular, there are
+  two routes used to create an account:
+  
+  - `GET /users/new`
+  
+  This route renders a page that prompts the user to enter the information
+  needed to register an acccount.  This information consists of their name,
+  preferred username, and password.
+  
+  - `POST /users`
+  
+  This route creates a new account using the information entered by the user.
+  The password is first hashed and stored in hashed format.
+
 ## License
 
 [The Unlicense](https://opensource.org/licenses/unlicense)
