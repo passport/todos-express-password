@@ -72,7 +72,7 @@ Added to the scaffolding are files which add authentication to the application.
   
     This route authenticates the user using their username and password.
 
-* [`routes/users.js`](routes/auth.js)
+* [`routes/users.js`](routes/users.js)
 
   This file defines the routes used for registration.  In particular, there are
   two routes used to create an account:
