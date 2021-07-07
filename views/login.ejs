@@ -31,6 +31,14 @@
       
       <article class="grid">
         <div>
+          <% if (hasMessages) { %>
+            <ul>
+            <% messages.forEach(function(message){ %>
+              <li><%= message %></li>
+            <% }); %>
+            </ul>
+          <% } %>
+          
           <hgroup>
             <h1>Sign in</h1>
           </hgroup>
