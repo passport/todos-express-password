@@ -17,7 +17,7 @@ module.exports = function() {
       if (err) { return cb(err); }
       if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
       
-      crypto.pbkdf2(password, row.salt, 10000, 32, 'sha256', function(err, hashedPassword) {
+      crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
         if (err) { return cb(err); }
         if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
           return cb(null, false, { message: 'Incorrect username or password.' });
