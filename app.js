@@ -33,7 +33,6 @@ app.use(function(req, res, next) {
   req.session.messages = [];
   next();
 });
-app.use(passport.initialize());
 app.use(passport.authenticate('session'));
 
 // Define routes.
