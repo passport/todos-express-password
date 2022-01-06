@@ -17,6 +17,7 @@ router.get('/', function(req, res, next) {
         url: '/' + row.id
       }
     });
+    res.locals.remainingCount = res.locals.todos.filter(function(todo) { return !todo.completed; }).length;
     res.render('todo', { user: req.user });
   });
 });

@@ -63,7 +63,7 @@
       <% if (todos.length > 0) { %>
 			<footer class="footer">
 				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong>0</strong> item left</span>
+				<span class="todo-count"><strong><%= remainingCount %></strong> <%= pluralize('item', remainingCount) %> left</span>
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>

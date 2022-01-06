@@ -12,6 +12,8 @@ var todosRouter = require('./routes/todos');
 
 var app = express();
 
+app.locals.pluralize = require('pluralize');
+
 require('./boot/db')();
 require('./boot/auth')();
 
