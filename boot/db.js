@@ -12,7 +12,9 @@ module.exports = function() {
     )");
     
     db.run("CREATE TABLE IF NOT EXISTS todos ( \
-      label TEXT \
+      title TEXT NOT NULL, \
+      completed INTEGER, \
+      `order` INTEGER \
     )");
   });
 
