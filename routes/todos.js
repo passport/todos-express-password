@@ -3,6 +3,8 @@ var db = require('../db');
 
 var router = express.Router();
 
+// TODO: validation, non empty, trim input
+
 router.post('/', function(req, res, next) {
   db.run('INSERT INTO todos (label) VALUES (?)', [
     req.body.label

@@ -18,6 +18,7 @@
         </form>
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
+      <% if (todos.length > 0) { %>
 			<section class="main">
 				<input id="toggle-all" class="toggle-all" type="checkbox">
 				<label for="toggle-all">Mark all as complete</label>
@@ -35,6 +36,7 @@
           
 					<!-- These are here just to show the structure of the list items -->
 					<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+          <!--
 					<li class="completed">
 						<div class="view">
 							<input class="toggle" type="checkbox" checked>
@@ -51,9 +53,12 @@
 						</div>
 						<input class="edit" value="Rule the web">
 					</li>
+          -->
 				</ul>
 			</section>
+      <% } %>
 			<!-- This footer should be hidden by default and shown when there are todos -->
+      <% if (todos.length > 0) { %>
 			<footer class="footer">
 				<!-- This should be `0 items left` by default -->
 				<span class="todo-count"><strong>0</strong> item left</span>
@@ -72,14 +77,15 @@
 				<!-- Hidden if no completed items are left ↓ -->
 				<button class="clear-completed">Clear completed</button>
 			</footer>
+      <% } %>
 		</section>
 		<footer class="info">
 			<p>Double-click to edit a todo</p>
 			<!-- Remove the below line ↓ -->
-			<p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+			<p>Template by <a href="https://sindresorhus.com">Sindre Sorhus</a></p>
 			<!-- Change this out with your name and url ↓ -->
-			<p>Created by <a href="http://todomvc.com">you</a></p>
-			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+			<p>Created by <a href="https://www.jaredhanson.me">Jared Hanson</a></p>
+			<p>Part of <a href="https://todomvc.com">TodoMVC</a></p>
 		</footer>
 		<!-- Scripts here. Don't remove ↓ -->
 		<script src="node_modules/todomvc-common/base.js"></script>
