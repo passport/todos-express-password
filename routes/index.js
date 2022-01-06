@@ -21,8 +21,11 @@ router.get('/', function(req, res, next) {
   });
 });
 
-// // TODO: validation, non empty, trim input
 router.post('/', function(req, res, next) {
+  req.body.title = req.body.title.trim();
+  if (req.body.title == '') { return res.redirect('/'); }
+  next();
+}, function(req, res, next) {
   db.run('INSERT INTO todos (title, completed) VALUES (?, ?)', [
     req.body.title,
     req.body.completed == true ? 1 : null
