@@ -10,6 +10,10 @@ module.exports = function() {
       salt BLOB, \
       name TEXT \
     )");
+    
+    db.run("CREATE TABLE IF NOT EXISTS todos ( \
+      label TEXT \
+    )");
   });
 
   //db.close();
