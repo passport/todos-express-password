@@ -13,8 +13,7 @@ module.exports = function() {
     
     db.run("CREATE TABLE IF NOT EXISTS todos ( \
       title TEXT NOT NULL, \
-      completed INTEGER, \
-      `order` INTEGER \
+      completed INTEGER \
     )");
   });
 

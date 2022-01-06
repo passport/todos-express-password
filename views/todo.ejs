@@ -27,11 +27,11 @@
 						<li>
 							<form action="<%= todo.url %>" method="post">
 								<div class="view">
-									<input class="toggle" type="checkbox" name="completed" <%= todo.completed ? "checked" : "" %> onChange="this.form.submit()">
-									<label><%= todo.title %></label>
+									<input class="toggle" type="checkbox" name="completed" <%= todo.completed ? "checked" : "" %> onchange="this.form.submit()">
+									<label ondblclick="this.closest('li').className = this.closest('li').className + ' editing'; this.closest('li').querySelector('input.edit').focus(); this.closest('li').querySelector('input.edit').value = '<%= todo.title %>'"><%= todo.title %></label>
 									<button class="destroy"></button>
 								</div>
-								<input class="edit" name="title" value="Rule the web">
+								<input class="edit" name="title" onblur="this.form.submit();">
 							</form>
   					</li>
 					<% }); %>
