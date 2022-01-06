@@ -25,12 +25,14 @@
 				<ul class="todo-list">
 					<% todos.forEach(function(todo){ %>
 						<li>
-							<div class="view">
-								<input class="toggle" type="checkbox" <%= todo.completed ? "checked" : "" %>>
-								<label><%= todo.title %></label>
-								<button class="destroy"></button>
-  						</div>
-  						<input class="edit" value="Rule the web">
+							<form action="<%= todo.url %>" method="post">
+								<div class="view">
+									<input class="toggle" type="checkbox" name="completed" <%= todo.completed ? "checked" : "" %> onChange="this.form.submit()">
+									<label><%= todo.title %></label>
+									<button class="destroy"></button>
+								</div>
+								<input class="edit" name="title" value="Rule the web">
+							</form>
   					</li>
 					<% }); %>
           

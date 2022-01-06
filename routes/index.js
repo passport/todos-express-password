@@ -40,4 +40,15 @@ router.post('/', function(req, res, next) {
   });
 });
 
+router.post('/:id(\\d+)', function(req, res, next) {
+  db.run('UPDATE todos SET title = ?, completed = ? WHERE rowid = ?', [
+    req.body.title,
+    req.body.completed !== undefined ? 1 : null,
+    req.params.id
+  ], function(err) {
+    if (err) { return next(err); }
+    return res.redirect('/');
+  });
+});
+
 module.exports = router;
