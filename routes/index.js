@@ -23,8 +23,10 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   req.body.title = req.body.title.trim();
-  if (req.body.title == '') { return res.redirect('/'); }
   next();
+}, function(req, res, next) {
+  if (req.body.title !== '') { return next(); }
+  return res.redirect('/');
 }, function(req, res, next) {
   db.run('INSERT INTO todos (title, completed) VALUES (?, ?)', [
     req.body.title,
@@ -36,6 +38,18 @@ router.post('/', function(req, res, next) {
 });
 
 router.post('/:id(\\d+)', function(req, res, next) {
+  req.body.title = req.body.title.trim();
+  next();
+}, function(req, res, next) {
+  if (req.body.title !== '') { return next(); }
+  db.run('DELETE FROM todos WHERE rowid = ?', [
+    req.params.id
+  ], function(err) {
+    if (err) { return next(err); }
+    return res.redirect('/');
+  });
+},
+function(req, res, next) {
   db.run('UPDATE todos SET title = ?, completed = ? WHERE rowid = ?', [
     req.body.title,
     req.body.completed !== undefined ? 1 : null,
