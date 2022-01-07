@@ -55,7 +55,8 @@ router.post('/', function(req, res, next) {
   if (req.body.title !== '') { return next(); }
   return res.redirect('/' + (req.body.filter || ''));
 }, function(req, res, next) {
-  db.run('INSERT INTO todos (title, completed) VALUES (?, ?)', [
+  db.run('INSERT INTO todos (owner_id, title, completed) VALUES (?, ?, ?)', [
+    req.user.id,
     req.body.title,
     req.body.completed == true ? 1 : null
   ], function(err) {
