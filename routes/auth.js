@@ -5,7 +5,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  res.render('login2');
 });
 
 router.post('/login/password', passport.authenticate('local', {

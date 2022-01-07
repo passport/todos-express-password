@@ -5,7 +5,7 @@ var db = require('../db');
 var router = express.Router();
 
 router.get('/new', function(req, res, next) {
-  res.render('signup');
+  res.render('signup2');
 });
 
 router.post('/', function(req, res, next) {

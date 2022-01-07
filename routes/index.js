@@ -28,7 +28,10 @@ function fetchTodos(req, res, next) {
 
 
 /* GET home page. */
-router.get('/', fetchTodos, function(req, res, next) {
+router.get('/', function(req, res, next) {
+  if (!req.user) { return res.render('home'); }
+  next();
+}, fetchTodos, function(req, res, next) {
   res.locals.filter = null;
   res.render('todos', { user: req.user });
 });
