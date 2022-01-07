@@ -18,7 +18,7 @@
 				</form>
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
-			<% if (todos.length > 0) { %>
+			<% if (activeCount + completedCount > 0) { %>
 			<section class="main">
 				<input id="toggle-all" class="toggle-all" type="checkbox">
 				<label for="toggle-all">Mark all as complete</label>
@@ -60,7 +60,7 @@
 			</section>
       <% } %>
 			<!-- This footer should be hidden by default and shown when there are todos -->
-      <% if (todos.length > 0) { %>
+      <% if (activeCount + completedCount > 0) { %>
 			<footer class="footer">
 				<!-- This should be `0 items left` by default -->
 				<span class="todo-count"><strong><%= activeCount %></strong> <%= pluralize('item', activeCount) %> left</span>
