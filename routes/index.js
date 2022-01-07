@@ -68,7 +68,7 @@ router.post('/:id(\\d+)', function(req, res, next) {
     req.params.id
   ], function(err) {
     if (err) { return next(err); }
-    return res.redirect('/');
+    return res.redirect('/' + (req.body.filter || ''));
   });
 },
 function(req, res, next) {
@@ -78,7 +78,7 @@ function(req, res, next) {
     req.params.id
   ], function(err) {
     if (err) { return next(err); }
-    return res.redirect('/');
+    return res.redirect('/' + (req.body.filter || ''));
   });
 });
 

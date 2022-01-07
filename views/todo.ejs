@@ -35,6 +35,9 @@
 									<button class="destroy"></button>
 								</div>
 								<input class="edit" name="title" value="<%= todo.title %>" onkeyup="if (event.keyCode == 27) { this.setAttribute('data-esc', ''); this.closest('li').className = this.closest('li').className.replace('editing', ''); }" onblur="if (this.getAttribute('data-esc') !== null) { return this.removeAttribute('data-esc'); } this.form.submit();">
+								<% if (filter) { %>
+								<input type="hidden" name="filter" value="<%= filter %>"/>
+								<% } %>
 							</form>
   					</li>
 					<% }); %>
