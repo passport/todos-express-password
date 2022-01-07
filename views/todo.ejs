@@ -63,7 +63,7 @@
       <% if (todos.length > 0) { %>
 			<footer class="footer">
 				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong><%= remainingCount %></strong> <%= pluralize('item', remainingCount) %> left</span>
+				<span class="todo-count"><strong><%= activeCount %></strong> <%= pluralize('item', activeCount) %> left</span>
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>
@@ -78,7 +78,9 @@
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
 				<% if (completedCount > 0) { %>
-				<button class="clear-completed">Clear completed</button>
+				<form action="/clear" method="post">
+					<button class="clear-completed">Clear completed</button>
+				</form>
 				<% } %>
 			</footer>
       <% } %>

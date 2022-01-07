@@ -18,8 +18,8 @@ router.get('/', function(req, res, next) {
       }
     });
     res.locals.todos = todos;
-    res.locals.remainingCount = todos.filter(function(todo) { return !todo.completed; }).length;
-    res.locals.completedCount = todos.length - res.locals.remainingCount;
+    res.locals.activeCount = todos.filter(function(todo) { return !todo.completed; }).length;
+    res.locals.completedCount = todos.length - res.locals.activeCount;
     res.render('todo', { user: req.user });
   });
 });
@@ -57,6 +57,15 @@ function(req, res, next) {
     req.body.title,
     req.body.completed !== undefined ? 1 : null,
     req.params.id
+  ], function(err) {
+    if (err) { return next(err); }
+    return res.redirect('/');
+  });
+});
+
+router.post('/clear', function(req, res, next) {
+  db.run('DELETE FROM todos WHERE completed = ?', [
+    1
   ], function(err) {
     if (err) { return next(err); }
     return res.redirect('/');
