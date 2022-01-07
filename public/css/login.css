@@ -1,30 +1,22 @@
-body {
-  font-family: sans-serif;
-  font-weight: 500;
-  margin: 10px 20px;
-}
-
 button {
-  background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  color: #444;
-  cursor: pointer;
-  display: block;
-  font-size: 22px;
-  font-weight: 500;
-  margin: 3px 0 0 0;
+	display: block;
   padding: 10px;
+	width: 100%;
+	border-radius: 3px;
+  background: #d83f45;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: #ccc;
-  color: black;
+  background-color: #c83f45;
 }
 
 form {
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 400px;
 }
 
 h1 {
@@ -36,10 +28,12 @@ h1 {
 }
 
 input {
-  border: 1px solid #ccc;
-  font-size: 22px;
-  padding: 15px;
-  width: 90%;
+	box-sizing: border-box;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+  font-size: 14px;
+  padding: 10px;
+  width: 100%;
 }
 
 input[type=email]:not(:focus):invalid,
@@ -62,8 +56,8 @@ form section {
 
 
 .prompt {
-	x-background: #fff;
-	background: green;
-	x-margin: 130px 0 40px 0;
-	x-padding: 16px 10px;
+	background: #fff;
+	border: 1px solid #e6e6e6;
+	border-radius: 8px;
+	x-max-width: 600px;
 }
