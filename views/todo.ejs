@@ -27,7 +27,7 @@
 						<li>
 							<form action="<%= todo.url %>" method="post">
 								<div class="view">
-									<input class="toggle" type="checkbox" name="completed" <%= todo.completed ? "checked" : "" %> onchange="this.form.submit();">
+									<input class="toggle" type="checkbox" name="completed" <%- todo.completed ? 'checked' : '' %> onchange="this.form.submit();">
 									<label ondblclick="this.closest('li').className = this.closest('li').className + ' editing'; this.closest('li').querySelector('input.edit').focus(); this.closest('li').querySelector('input.edit').value = ''; this.closest('li').querySelector('input.edit').value = '<%= todo.title %>';"><%= todo.title %></label>
 									<button class="destroy"></button>
 								</div>
@@ -67,13 +67,13 @@
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>
-						<a class="selected" href="#/">All</a>
+						<a <%- !filter ? 'class="selected"' : '' %> href="/">All</a>
 					</li>
 					<li>
-						<a href="#/active">Active</a>
+						<a <%- filter == 'active' ? 'class="selected"' : '' %> href="/active">Active</a>
 					</li>
 					<li>
-						<a href="#/completed">Completed</a>
+						<a <%- filter == 'completed' ? 'class="selected"' : '' %> href="/completed">Completed</a>
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
