@@ -1,0 +1,69 @@
+body {
+  font-family: sans-serif;
+  font-weight: 500;
+  margin: 10px 20px;
+}
+
+button {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  color: #444;
+  cursor: pointer;
+  display: block;
+  font-size: 22px;
+  font-weight: 500;
+  margin: 3px 0 0 0;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: #ccc;
+  color: black;
+}
+
+form {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+h1 {
+  border-bottom: 1px solid #ccc;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  padding: 0 0 5px 0;
+}
+
+input {
+  border: 1px solid #ccc;
+  font-size: 22px;
+  padding: 15px;
+  width: 90%;
+}
+
+input[type=email]:not(:focus):invalid,
+input[type=password]:not(:focus):invalid {
+  color: red;
+  outline-color: red;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 3px 0;
+}
+
+form section {
+  margin: 0 0 20px 0;
+  position: relative; /* for password toggle positioning */
+}
+
+
+.prompt {
+	x-background: #fff;
+	background: green;
+	x-margin: 130px 0 40px 0;
+	x-padding: 16px 10px;
+}
