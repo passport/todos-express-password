@@ -15,6 +15,9 @@
 				<h1>todos</h1>
 				<form action="/" method="post">
 					<input class="new-todo" name="title" placeholder="What needs to be done?" autofocus>
+					<% if (filter) { %>
+					<input type="hidden" name="filter" value="<%= filter %>"/>
+					<% } %>
 				</form>
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
