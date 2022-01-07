@@ -10,14 +10,16 @@ router.get('/', function(req, res, next) {
   db.all('SELECT rowid AS id, * FROM todos', [], function(err, rows) {
     if (err) { return next(err); }
     
-    res.locals.todos = rows.map(function(row) {
+    var todos = rows.map(function(row) {
       return {
         title: row.title,
         completed: row.completed == 1 ? true : false,
         url: '/' + row.id
       }
     });
-    res.locals.remainingCount = res.locals.todos.filter(function(todo) { return !todo.completed; }).length;
+    res.locals.todos = todos;
+    res.locals.remainingCount = todos.filter(function(todo) { return !todo.completed; }).length;
+    res.locals.completedCount = todos.length - res.locals.remainingCount;
     res.render('todo', { user: req.user });
   });
 });

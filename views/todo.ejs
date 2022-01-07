@@ -77,7 +77,7 @@
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
-				<% if (todos.length - remainingCount != 0) { %>
+				<% if (completedCount > 0) { %>
 				<button class="clear-completed">Clear completed</button>
 				<% } %>
 			</footer>
