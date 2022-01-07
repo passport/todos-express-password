@@ -44,7 +44,7 @@ input[type=password]:not(:focus):invalid {
 
 label {
   display: block;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
   margin: 0 0 3px 0;
 }
