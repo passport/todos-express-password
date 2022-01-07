@@ -3,64 +3,42 @@ var db = require('../db');
 
 var router = express.Router();
 
+
+function fetchTodos(req, res, next) {
+  db.all('SELECT rowid AS id, * FROM todos', [], function(err, rows) {
+    if (err) { return next(err); }
+    
+    var todos = rows.map(function(row) {
+      return {
+        title: row.title,
+        completed: row.completed == 1 ? true : false,
+        url: '/' + row.id
+      }
+    });
+    res.locals.todos = todos;
+    res.locals.activeCount = todos.filter(function(todo) { return !todo.completed; }).length;
+    res.locals.completedCount = todos.length - res.locals.activeCount;
+    next();
+  });
+}
+
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  //res.render('index', { user: req.user });
-  
-  db.all('SELECT rowid AS id, * FROM todos', [], function(err, rows) {
-    if (err) { return next(err); }
-    
-    var todos = rows.map(function(row) {
-      return {
-        title: row.title,
-        completed: row.completed == 1 ? true : false,
-        url: '/' + row.id
-      }
-    });
-    res.locals.todos = todos;
-    res.locals.activeCount = todos.filter(function(todo) { return !todo.completed; }).length;
-    res.locals.completedCount = todos.length - res.locals.activeCount;
-    res.locals.filter = null;
-    res.render('todo', { user: req.user });
-  });
+router.get('/', fetchTodos, function(req, res, next) {
+  res.locals.filter = null;
+  res.render('todo', { user: req.user });
 });
 
-router.get('/active', function(req, res, next) {
-  db.all('SELECT rowid AS id, * FROM todos', [], function(err, rows) {
-    if (err) { return next(err); }
-    
-    var todos = rows.map(function(row) {
-      return {
-        title: row.title,
-        completed: row.completed == 1 ? true : false,
-        url: '/' + row.id
-      }
-    });
-    res.locals.todos = todos;
-    res.locals.activeCount = todos.filter(function(todo) { return !todo.completed; }).length;
-    res.locals.completedCount = todos.length - res.locals.activeCount;
-    res.locals.filter = 'active';
-    res.render('todo', { user: req.user });
-  });
+router.get('/active', fetchTodos, function(req, res, next) {
+  res.locals.todos = res.locals.todos.filter(function(todo) { return !todo.completed; });
+  res.locals.filter = 'active';
+  res.render('todo', { user: req.user });
 });
 
-router.get('/completed', function(req, res, next) {
-  db.all('SELECT rowid AS id, * FROM todos', [], function(err, rows) {
-    if (err) { return next(err); }
-    
-    var todos = rows.map(function(row) {
-      return {
-        title: row.title,
-        completed: row.completed == 1 ? true : false,
-        url: '/' + row.id
-      }
-    });
-    res.locals.todos = todos;
-    res.locals.activeCount = todos.filter(function(todo) { return !todo.completed; }).length;
-    res.locals.completedCount = todos.length - res.locals.activeCount;
-    res.locals.filter = 'completed';
-    res.render('todo', { user: req.user });
-  });
+router.get('/completed', fetchTodos, function(req, res, next) {
+  res.locals.todos = res.locals.todos.filter(function(todo) { return todo.completed; });
+  res.locals.filter = 'completed';
+  res.render('todo', { user: req.user });
 });
 
 router.post('/', function(req, res, next) {
