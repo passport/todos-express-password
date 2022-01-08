@@ -5,7 +5,9 @@ var router = express.Router();
 
 
 function fetchTodos(req, res, next) {
-  db.all('SELECT rowid AS id, * FROM todos', [], function(err, rows) {
+  db.all('SELECT rowid AS id, * FROM todos WHERE owner_id = ?', [
+    req.user.id
+  ], function(err, rows) {
     if (err) { return next(err); }
     
     var todos = rows.map(function(row) {
@@ -70,18 +72,20 @@ router.post('/:id(\\d+)', function(req, res, next) {
   next();
 }, function(req, res, next) {
   if (req.body.title !== '') { return next(); }
-  db.run('DELETE FROM todos WHERE rowid = ?', [
-    req.params.id
+  db.run('DELETE FROM todos WHERE rowid = ? AND owner_id = ?', [
+    req.params.id,
+    req.user.id
   ], function(err) {
     if (err) { return next(err); }
     return res.redirect('/' + (req.body.filter || ''));
   });
 },
 function(req, res, next) {
-  db.run('UPDATE todos SET title = ?, completed = ? WHERE rowid = ?', [
+  db.run('UPDATE todos SET title = ?, completed = ? WHERE rowid = ? AND owner_id = ?', [
     req.body.title,
     req.body.completed !== undefined ? 1 : null,
-    req.params.id
+    req.params.id,
+    req.user.id
   ], function(err) {
     if (err) { return next(err); }
     return res.redirect('/' + (req.body.filter || ''));
@@ -89,7 +93,8 @@ function(req, res, next) {
 });
 
 router.post('/clear', function(req, res, next) {
-  db.run('DELETE FROM todos WHERE completed = ?', [
+  db.run('DELETE FROM todos WHERE owner_id = ? AND completed = ?', [
+    req.user.id,
     1
   ], function(err) {
     if (err) { return next(err); }
