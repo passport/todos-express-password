@@ -7,7 +7,6 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var myaccountRouter = require('./routes/myaccount');
-var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -42,6 +41,5 @@ app.use(passport.authenticate('session'));
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/myaccount', myaccountRouter);
-app.use('/users', usersRouter);
 
 module.exports = app;
