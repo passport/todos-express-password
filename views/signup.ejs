@@ -1,50 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-    <title>Log in example | Passport.js</title>
-    <meta name="description" content="Express 4.x app using Passport for authentication with username and password.">
-
-     <!-- Pico.css -->
-    <link rel="stylesheet" href="/stylesheets/pico.css">
-    <style>
-      article div:nth-of-type(2) {
-        display: none;
-        background-color: #374956;
-        background-image: url("https://source.unsplash.com/QgR5pKDoCd0/1000x1200");
-        background-position: center;
-        background-size: cover;
-      }
-      @media (min-width: 992px) {
-        .grid > div:nth-of-type(2) {
-          display: block;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-
-    <main class="container">
-      
-      <article class="grid">
-        <div>
-          <hgroup>
-            <h1>Sign up</h1>
-          </hgroup>
-          <form action="/users" method="post">
-            <input type="text" name="name" placeholder="Name">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <button type="submit" class="contrast">Sign up</button>
-          </form>
-        </div>
-        <div></div>
-      </article>
-    </main>
-
-  </body>
-
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Express • TodoMVC</title>
+		<link rel="stylesheet" href="/node_modules/todomvc-common/base.css">
+		<link rel="stylesheet" href="/node_modules/todomvc-app-css/index.css">
+		<link rel="stylesheet" href="/css/login.css">
+	</head>
+	<body>
+		<section class="prompt">
+				<form action="/users" method="post">
+					<h1>Sign up</h3>
+					<section>
+						<label for="name">Name</label>
+						<input id="name" name="name" type="text" autocomplete="name" required autofocus>
+					</section>
+					<section>
+						<label for="username">Username</label>
+						<input id="username" name="username" type="text" autocomplete="username" required>
+					</section>
+					<section>
+						<label for="current-password">Password</label>
+						<input id="current-password" name="password" type="password" autocomplete="current-password" required />
+					</section>
+					<button type="submit">Sign up</button>
+				</form>
+				<hr>
+				<p class="help">Already have an account? <a href="/login">Sign in</a></p>
+		</section>
+		<footer class="info">
+			<p>Created by <a href="https://www.jaredhanson.me">Jared Hanson</a></p>
+			<p>Part of <a href="https://todomvc.com">TodoMVC</a></p>
+			<p>Authentication powered by <a href="https://www.passportjs.org">Passport</a></p>
+		</footer>
+		<!-- Scripts here. Don't remove ↓ -->
+		<script src="node_modules/todomvc-common/base.js"></script>
+		<script src="js/app.js"></script>
+	</body>
 </html>
