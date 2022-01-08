@@ -8,7 +8,6 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var myaccountRouter = require('./routes/myaccount');
 var usersRouter = require('./routes/users');
-var todosRouter = require('./routes/todos');
 
 var app = express();
 
@@ -44,6 +43,5 @@ app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/myaccount', myaccountRouter);
 app.use('/users', usersRouter);
-app.use('/todos', todosRouter);
 
 module.exports = app;
