@@ -1,4 +1,5 @@
 var express = require('express');
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 var db = require('../db');
 
 var router = express.Router();
@@ -38,19 +39,19 @@ router.get('/', function(req, res, next) {
   res.render('todos', { user: req.user });
 });
 
-router.get('/active', fetchTodos, function(req, res, next) {
+router.get('/active', ensureLoggedIn(), fetchTodos, function(req, res, next) {
   res.locals.todos = res.locals.todos.filter(function(todo) { return !todo.completed; });
   res.locals.filter = 'active';
   res.render('todos', { user: req.user });
 });
 
-router.get('/completed', fetchTodos, function(req, res, next) {
+router.get('/completed', ensureLoggedIn(), fetchTodos, function(req, res, next) {
   res.locals.todos = res.locals.todos.filter(function(todo) { return todo.completed; });
   res.locals.filter = 'completed';
   res.render('todos', { user: req.user });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', ensureLoggedIn(), function(req, res, next) {
   req.body.title = req.body.title.trim();
   next();
 }, function(req, res, next) {
@@ -67,7 +68,7 @@ router.post('/', function(req, res, next) {
   });
 });
 
-router.post('/:id(\\d+)', function(req, res, next) {
+router.post('/:id(\\d+)', ensureLoggedIn(), function(req, res, next) {
   req.body.title = req.body.title.trim();
   next();
 }, function(req, res, next) {
@@ -92,7 +93,7 @@ function(req, res, next) {
   });
 });
 
-router.post('/clear', function(req, res, next) {
+router.post('/clear', ensureLoggedIn(), function(req, res, next) {
   db.run('DELETE FROM todos WHERE owner_id = ? AND completed = ?', [
     req.user.id,
     1
