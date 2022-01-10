@@ -3,14 +3,12 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Template • TodoMVC</title>
-		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
-		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
-		<!-- CSS overrides - remove if you don't need it -->
-		<link rel="stylesheet" href="css/app.css">
+		<title>Express • TodoMVC</title>
+		<link rel="stylesheet" href="/css/base.css">
+		<link rel="stylesheet" href="/css/index.css">
+		<link rel="stylesheet" href="/css/app.css">
 	</head>
 	<body>
-		
 		<section class="todoapp">
 			<nav class="nav">
 				<ul>
@@ -31,7 +29,6 @@
 					<% } %>
 				</form>
 			</header>
-			<!-- This section should be hidden by default and shown when there are todos -->
 			<% if (activeCount + completedCount > 0) { %>
 			<section class="main">
 				<input id="toggle-all" class="toggle-all" type="checkbox">
