@@ -36,19 +36,19 @@ router.get('/', function(req, res, next) {
   next();
 }, fetchTodos, function(req, res, next) {
   res.locals.filter = null;
-  res.render('app', { user: req.user });
+  res.render('index', { user: req.user });
 });
 
 router.get('/active', ensureLoggedIn(), fetchTodos, function(req, res, next) {
   res.locals.todos = res.locals.todos.filter(function(todo) { return !todo.completed; });
   res.locals.filter = 'active';
-  res.render('app', { user: req.user });
+  res.render('index', { user: req.user });
 });
 
 router.get('/completed', ensureLoggedIn(), fetchTodos, function(req, res, next) {
   res.locals.todos = res.locals.todos.filter(function(todo) { return todo.completed; });
   res.locals.filter = 'completed';
-  res.render('app', { user: req.user });
+  res.render('index', { user: req.user });
 });
 
 router.post('/', ensureLoggedIn(), function(req, res, next) {
