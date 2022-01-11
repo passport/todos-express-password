@@ -13,6 +13,7 @@ function fetchTodos(req, res, next) {
     
     var todos = rows.map(function(row) {
       return {
+        id: row.id,
         title: row.title,
         completed: row.completed == 1 ? true : false,
         url: '/' + row.id
@@ -85,6 +86,16 @@ function(req, res, next) {
   db.run('UPDATE todos SET title = ?, completed = ? WHERE rowid = ? AND owner_id = ?', [
     req.body.title,
     req.body.completed !== undefined ? 1 : null,
+    req.params.id,
+    req.user.id
+  ], function(err) {
+    if (err) { return next(err); }
+    return res.redirect('/' + (req.body.filter || ''));
+  });
+});
+
+router.post('/:id(\\d+)/delete', ensureLoggedIn(), function(req, res, next) {
+  db.run('DELETE FROM todos WHERE rowid = ? AND owner_id = ?', [
     req.params.id,
     req.user.id
   ], function(err) {
