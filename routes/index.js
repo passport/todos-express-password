@@ -1,9 +1,7 @@
 var express = require('express');
+var router = express.Router();
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 var db = require('../db');
-
-var router = express.Router();
-
 
 function fetchTodos(req, res, next) {
   db.all('SELECT rowid AS id, * FROM todos WHERE owner_id = ?', [
@@ -25,11 +23,6 @@ function fetchTodos(req, res, next) {
     next();
   });
 }
-
-// TODO: validate filter middleware?
-// TODO: preserve filter on clear
-// TODO: implement mark all complete
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -81,8 +74,7 @@ router.post('/:id(\\d+)', ensureLoggedIn(), function(req, res, next) {
     if (err) { return next(err); }
     return res.redirect('/' + (req.body.filter || ''));
   });
-},
-function(req, res, next) {
+}, function(req, res, next) {
   db.run('UPDATE todos SET title = ?, completed = ? WHERE rowid = ? AND owner_id = ?', [
     req.body.title,
     req.body.completed !== undefined ? 1 : null,
