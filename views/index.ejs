@@ -58,13 +58,10 @@
 					<% }); %>
 				</ul>
 			</section>
-      <% } %>
-			<!-- This footer should be hidden by default and shown when there are todos -->
-      <% if (activeCount + completedCount > 0) { %>
+			<% } %>
+			<% if (activeCount + completedCount > 0) { %>
 			<footer class="footer">
-				<!-- This should be `0 items left` by default -->
 				<span class="todo-count"><strong><%= activeCount %></strong> <%= pluralize('item', activeCount) %> left</span>
-				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>
 						<a <%- !filter ? 'class="selected"' : '' %> href="/">All</a>
@@ -76,14 +73,16 @@
 						<a <%- filter == 'completed' ? 'class="selected"' : '' %> href="/completed">Completed</a>
 					</li>
 				</ul>
-				<!-- Hidden if no completed items are left ↓ -->
 				<% if (completedCount > 0) { %>
-				<form action="/clear" method="post">
+				<form action="/clear-completed" method="post">
 					<button class="clear-completed">Clear completed</button>
+					<% if (filter) { %>
+					<input type="hidden" name="filter" value="<%= filter %>"/>
+					<% } %>
 				</form>
 				<% } %>
 			</footer>
-      <% } %>
+			<% } %>
 		</section>
 		<footer class="info">
 			<p>Double-click to edit a todo</p>
