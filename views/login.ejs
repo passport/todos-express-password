@@ -12,6 +12,16 @@
 		<section class="prompt">
 				<form action="/login/password" method="post">
 					<h1>Sign in</h3>
+					
+					<% if (hasMessages) { %>
+					<section class="messages">
+						<ul>
+							<% messages.forEach(function(message){ %>
+							<li><%= message %></li>
+							<% }); %>
+						</ul>
+					</section>
+					<% } %>
 					<section>
 						<label for="username">Username</label>
 						<input id="username" name="username" type="text" autocomplete="username" required autofocus>

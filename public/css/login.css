@@ -70,3 +70,12 @@ p.help {
 	border: 1px solid #e6e6e6;
 	border-radius: 8px;
 }
+
+.messages {
+  border: 1px solid #d9d9d9;
+}
+
+.messages ul {
+  list-style: none;
+  margin: 0;
+}
