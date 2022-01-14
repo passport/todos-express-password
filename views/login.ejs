@@ -12,10 +12,8 @@
 		<section class="prompt">
 			<form action="/login/password" method="post">
 				<h1>Sign in</h3>
-				<% if (hasMessages || true) { %>
+				<% if (hasMessages) { %>
 				<section class="messages">
-					<p>Hello one</p>
-					<p>Goodbye two</p>
 					<% messages.forEach(function(message) { %>
 					<p><%= message %></p>
 					<% }); %>
