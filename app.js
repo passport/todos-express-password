@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var csrf = require('csurf');
 var passport = require('passport');
 var logger = require('morgan');
 
@@ -26,12 +27,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(csrf());
 app.use(passport.authenticate('session'));
+// WIP: factor this to express-locals-messages
 app.use(function(req, res, next) {
   var msgs = req.session.messages || [];
   res.locals.messages = msgs;
   res.locals.hasMessages = !! msgs.length;
   req.session.messages = [];
+  next();
+});
+
+app.use(function(req, res, next) {
+  res.locals.csrfToken = req.csrfToken();
   next();
 });
 

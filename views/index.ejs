@@ -16,6 +16,7 @@
 					<li>
 						<form action="/logout" method="post">
 							<button class="logout" type="submit">Sign out</button>
+							<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 						</form>
 					</li>
 				</ul>
@@ -27,6 +28,7 @@
 					<% if (filter) { %>
 					<input type="hidden" name="filter" value="<%= filter %>"/>
 					<% } %>
+					<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 				</form>
 			</header>
 			<% if (activeCount + completedCount > 0) { %>
@@ -34,6 +36,7 @@
 				<form action="/toggle-all" method="post">
 					<input id="toggle-all" class="toggle-all" type="checkbox" name="completed" <%- activeCount == 0 ? 'checked' : '' %> onchange="this.form.submit();">
 					<label for="toggle-all">Mark all as complete</label>
+					<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 				</form>
 				<ul class="todo-list">
 					<% todos.forEach(function(todo) { %>
@@ -48,11 +51,13 @@
 							<% if (filter) { %>
 							<input type="hidden" name="filter" value="<%= filter %>"/>
 							<% } %>
+							<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 						</form>
 						<form id="delete-<%= todo.id %>" action="<%= todo.url %>/delete" method="post">
 							<% if (filter) { %>
 							<input type="hidden" name="filter" value="<%= filter %>"/>
 							<% } %>
+							<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 						</form>
 					</li>
 					<% }); %>
@@ -79,6 +84,7 @@
 					<% if (filter) { %>
 					<input type="hidden" name="filter" value="<%= filter %>"/>
 					<% } %>
+					<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 				</form>
 				<% } %>
 			</footer>

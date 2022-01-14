@@ -31,6 +31,7 @@
 						<label for="current-password">Password</label>
 						<input id="current-password" name="password" type="password" autocomplete="current-password" required />
 					</section>
+					<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 					<button type="submit">Sign in</button>
 				</form>
 				<hr>
