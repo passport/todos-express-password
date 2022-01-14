@@ -12,7 +12,6 @@ var app = express();
 app.locals.pluralize = require('pluralize');
 
 require('./boot/db')();
-require('./boot/auth')();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
