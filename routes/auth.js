@@ -48,7 +48,7 @@ var router = express.Router();
 
 /* GET /login
  *
- * This route prompts the user to login.
+ * This route prompts the user to log in.
  *
  * The 'login' view renders an HTML form, into which the user enters their
  * username and password.  When the user submits the form, a request will be
@@ -80,15 +80,36 @@ router.post('/login/password', passport.authenticate('local', {
   failureMessage: true
 }));
 
+/* POST /logout
+ *
+ * This route logs the user out.
+ */
 router.post('/logout', function(req, res, next) {
   req.logout();
   res.redirect('/');
 });
 
+/* GET /signup
+ *
+ * This route prompts the user to sign up.
+ *
+ * The 'signup' view renders an HTML form, into which the user enters their
+ * desired username and password.  When the user submits the form, a request
+ * will be sent to the `POST /signup` route.
+ */
 router.get('/signup', function(req, res, next) {
   res.render('signup');
 });
 
+/* POST /signup
+ *
+ * This route creates a new user account.
+ *
+ * A desired username and password are submitted to this route via an HTML form,
+ * which was rendered by the `GET /signup` route.  The password is hashed and
+ * then a new user record is inserted into the database.  If the record is
+ * successfully created, the user is logged in.
+ */
 router.post('/signup', function(req, res, next) {
   var salt = crypto.randomBytes(16);
   crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
@@ -100,7 +121,7 @@ router.post('/signup', function(req, res, next) {
     ], function(err) {
       if (err) { return next(err); }
       var user = {
-        id: this.lastID.toString(),
+        id: this.lastID,
         username: req.body.username
       };
       req.login(user, function(err) {
