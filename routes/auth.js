@@ -4,12 +4,18 @@ var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
 var db = require('../db');
 
-// Configure the local strategy for use by Passport.
-//
-// The local strategy requires a `verify` function which receives the credentials
-// (`username` and `password`) submitted by the user.  The function must verify
-// that the password is correct and then invoke `cb` with a user object, which
-// will be set at `req.user` in route handlers after authentication.
+
+/* Configure password authentication strategy.
+ *
+ * The `LocalStrategy` authenticates users by verifying a username and password.
+ * The strategy parses the username and password from the request and calls the
+ * `verify` function.
+ *
+ * The `verify` function queries the database for the user record and verifies
+ * the password by hashing the password supplied by the user and comparing it to
+ * the hashed password stored in the database.  If the comparison succeeds, the
+ * user is authenticated; otherwise, not.
+ */
 passport.use(new LocalStrategy(function verify(username, password, cb) {
   db.get('SELECT rowid AS id, * FROM users WHERE username = ?', [ username ], function(err, row) {
     if (err) { return cb(err); }
@@ -43,6 +49,7 @@ passport.deserializeUser(function(user, cb) {
     return cb(null, user);
   });
 });
+
 
 var router = express.Router();
 
