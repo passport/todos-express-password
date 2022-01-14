@@ -4,7 +4,6 @@ var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
 var db = require('../db');
 
-
 // Configure the local strategy for use by Passport.
 //
 // The local strategy requires a `verify` function which receives the credentials
@@ -31,7 +30,6 @@ passport.use(new LocalStrategy(function(username, password, cb) {
   });
 }));
 
-
 // Configure Passport authenticated session persistence.
 //
 // In order to restore authentication state across HTTP requests, Passport needs
@@ -50,7 +48,6 @@ passport.deserializeUser(function(user, cb) {
     return cb(null, user);
   });
 });
-
 
 var router = express.Router();
 
@@ -77,14 +74,12 @@ router.post('/signup', function(req, res, next) {
   var salt = crypto.randomBytes(16);
   crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
     if (err) { return next(err); }
-    
     db.run('INSERT INTO users (username, hashed_password, salt) VALUES (?, ?, ?)', [
       req.body.username,
       hashedPassword,
       salt
     ], function(err) {
       if (err) { return next(err); }
-      
       var user = {
         id: this.lastID.toString(),
         username: req.body.username
