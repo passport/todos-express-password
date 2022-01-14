@@ -59,7 +59,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post('/login/password', passport.authenticate('local', {
-  successRedirect: '/',
+  successReturnToOrRedirect: '/',
   failureRedirect: '/login',
   failureMessage: true
 }));
