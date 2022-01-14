@@ -31,13 +31,21 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   });
 }));
 
-// Configure Passport authenticated session persistence.
-//
-// In order to restore authentication state across HTTP requests, Passport needs
-// to serialize users into and deserialize users out of the session.  The
-// typical implementation of this is as simple as supplying the user ID when
-// serializing, and querying the user record by ID from the database when
-// deserializing.
+/* Configure login session information.
+ *
+ * When a login session is established, information about the user will be
+ * stored in the session.  This information is supplied by the `serializeUser`
+ * function, which is yielding the user ID and username.
+ *
+ * As the user interacts with the app, subsequent requests will be authenticated
+ * by verifying the session.  The same user information that was serialized at
+ * session establishment will be restored when the session is authenticated by
+ * the `deserializeUser` function.
+ *
+ * Since every request to the app needs the user ID and username, in order to
+ * fetch todo records and render the user element in the navigation bar, that
+ * information is stored in the session.
+ */
 passport.serializeUser(function(user, cb) {
   process.nextTick(function() {
     cb(null, { id: user.id, username: user.username });
