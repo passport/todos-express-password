@@ -21,7 +21,6 @@ app.locals.pluralize = require('pluralize');
 // WIP: messages styling
 // WIP: logo on login
 // WIP: messages on sign up
-//WIP: sqlite persisted session
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
