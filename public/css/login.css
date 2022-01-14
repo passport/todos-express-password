@@ -1,3 +1,11 @@
+.prompt {
+	margin: 50px;
+	padding: 25px;
+	background: #fff;
+	border: 1px solid #e6e6e6;
+	border-radius: 8px;
+}
+
 button {
 	display: block;
 	padding: 10px;
@@ -14,11 +22,6 @@ button:hover {
 	background-color: #c83f45;
 }
 
-form {
-	max-width: 400px;
-	margin: 0 auto;
-}
-
 h1 {
 	margin: 0 0 20px 0;
 	padding: 0 0 5px 0;
@@ -26,31 +29,36 @@ h1 {
 	font-weight: 500;
 }
 
+form {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+form section {
+	margin: 0 0 20px 0;
+	position: relative; /* for password toggle positioning */
+}
+
+label {
+	display: block;
+	margin: 0 0 3px 0;
+	font-size: 14px;
+	font-weight: 500;
+}
+
 input {
 	box-sizing: border-box;
+	width: 100%;
+	padding: 10px;
+	font-size: 14px;
 	border: 1px solid #d9d9d9;
 	border-radius: 5px;
-  font-size: 14px;
-  padding: 10px;
-  width: 100%;
 }
 
 input[type=email]:not(:focus):invalid,
 input[type=password]:not(:focus):invalid {
-  color: red;
-  outline-color: red;
-}
-
-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  margin: 0 0 3px 0;
-}
-
-form section {
-  margin: 0 0 20px 0;
-  position: relative; /* for password toggle positioning */
+	color: red;
+	outline-color: red;
 }
 
 hr {
@@ -61,14 +69,6 @@ hr {
 p.help {
 	text-align: center;
 	font-weight: 400;
-}
-
-.prompt {
-	padding: 25px;
-	margin: 50px;
-	background: #fff;
-	border: 1px solid #e6e6e6;
-	border-radius: 8px;
 }
 
 .messages {
