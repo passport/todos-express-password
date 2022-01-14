@@ -10,7 +10,7 @@ var db = require('../db');
 // (`username` and `password`) submitted by the user.  The function must verify
 // that the password is correct and then invoke `cb` with a user object, which
 // will be set at `req.user` in route handlers after authentication.
-passport.use(new LocalStrategy(function(username, password, cb) {
+passport.use(new LocalStrategy(function verify(username, password, cb) {
   db.get('SELECT rowid AS id, * FROM users WHERE username = ?', [ username ], function(err, row) {
     if (err) { return cb(err); }
     if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
@@ -20,12 +20,7 @@ passport.use(new LocalStrategy(function(username, password, cb) {
       if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
         return cb(null, false, { message: 'Incorrect username or password.' });
       }
-      
-      var user = {
-        id: row.id.toString(),
-        username: row.username
-      };
-      return cb(null, user);
+      return cb(null, row);
     });
   });
 }));
@@ -51,10 +46,34 @@ passport.deserializeUser(function(user, cb) {
 
 var router = express.Router();
 
+/* GET /login
+ *
+ * This route prompts the user to login.
+ *
+ * The 'login' view renders an HTML form, into which the user enters their
+ * username and password.  When the user submits the form, a request will be
+ * sent to the `POST /login/password` route.
+ */
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+/* POST /login/password
+ *
+ * This route authenticates the user by verifying a username and password.
+ *
+ * A username and password are submitted to this route via an HTML form, which
+ * was rendered by the `GET /login` route.  The username and password is
+ * authenticated using the `local` strategy.  The strategy will parse the
+ * username and password from the request and call the `verify` function.
+ *
+ * Upon successful authentication, a login session will be established.  As the
+ * user interacts with the app, by clicking links and submitting forms, the
+ * subsequent requests will be authenticated by verifying the session.
+ *
+ * When authentication fails, the user will be re-prompted to login and shown
+ * a message informing them of what went wrong.
+ */
 router.post('/login/password', passport.authenticate('local', {
   successReturnToOrRedirect: '/',
   failureRedirect: '/login',
