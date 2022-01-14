@@ -16,8 +16,6 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
-app.locals.pluralize = require('pluralize');
-
 // WIP: messages styling
 // WIP: logo on login
 // WIP: messages on sign up
@@ -26,6 +24,8 @@ app.locals.pluralize = require('pluralize');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.locals.pluralize = require('pluralize');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -48,7 +48,6 @@ app.use(function(req, res, next) {
   req.session.messages = [];
   next();
 });
-
 app.use(function(req, res, next) {
   res.locals.csrfToken = req.csrfToken();
   next();
