@@ -1,4 +1,5 @@
 var sqlite3 = require('sqlite3');
+var crypto = require('crypto');
 
 var db = new sqlite3.Database('db.sqlite3');
 
@@ -14,6 +15,13 @@ db.serialize(function() {
     title TEXT NOT NULL, \
     completed INTEGER \
   )");
+  
+  var salt = crypto.randomBytes(16);
+  db.run('INSERT OR IGNORE INTO users (username, hashed_password, salt) VALUES (?, ?, ?)', [
+    'alice',
+    crypto.pbkdf2Sync('letmein', salt, 310000, 32, 'sha256'),
+    salt
+  ]);
 });
 
 module.exports = db;
