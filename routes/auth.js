@@ -31,7 +31,7 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   });
 }));
 
-/* Configure login session information.
+/* Configure session management.
  *
  * When a login session is established, information about the user will be
  * stored in the session.  This information is supplied by the `serializeUser`
