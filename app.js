@@ -16,8 +16,6 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
-// WIP: ensuring logout and session cleanup
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -37,7 +35,6 @@ app.use(session({
 }));
 app.use(csrf());
 app.use(passport.authenticate('session'));
-// WIP: factor this to express-locals-messages
 app.use(function(req, res, next) {
   var msgs = req.session.messages || [];
   res.locals.messages = msgs;
