@@ -36,7 +36,7 @@
 					<label for="toggle-all">Mark all as complete</label>
 				</form>
 				<ul class="todo-list">
-					<% todos.forEach(function(todo){ %>
+					<% todos.forEach(function(todo) { %>
 					<li <%- todo.completed ? 'class="completed"' : '' %>>
 						<form action="<%= todo.url %>" method="post">
 							<div class="view">

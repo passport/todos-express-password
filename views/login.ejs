@@ -13,13 +13,14 @@
 				<form action="/login/password" method="post">
 					<h1>Sign in</h3>
 					
-					<% if (hasMessages) { %>
+					<% if (hasMessages || true) { %>
 					<section class="messages">
-						<ul>
-							<% messages.forEach(function(message){ %>
-							<li><%= message %></li>
-							<% }); %>
-						</ul>
+						<p>Hello one</p>
+						<p>Goodbye two</p>
+						<% messages.forEach(function(message) { %>
+						<p><%= message %></p>
+						<p><%= message %></p>
+						<% }); %>
 					</section>
 					<% } %>
 					<section>

@@ -72,10 +72,12 @@ p.help {
 }
 
 .messages {
-  border: 1px solid #d9d9d9;
+  border: 1px solid #d83f45;
+  border-radius: 2px;
 }
 
-.messages ul {
-  list-style: none;
-  margin: 0;
+.messages p {
+  margin: 4px 10px;
+  x-line-height: 1.4;
 }
+
