@@ -29,6 +29,14 @@ h1 {
 	font-weight: 500;
 }
 
+h3 {
+	margin-top: 0;
+	font-size: 24px;
+	font-weight: 300;
+	text-align: center;
+	color: #b83f45;
+}
+
 form {
 	max-width: 400px;
 	margin: 0 auto;
