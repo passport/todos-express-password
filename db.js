@@ -1,7 +1,10 @@
 var sqlite3 = require('sqlite3');
+var mkdirp = require('mkdirp');
 var crypto = require('crypto');
 
-var db = new sqlite3.Database('db.sqlite3');
+mkdirp.sync('var/db');
+
+var db = new sqlite3.Database('var/db/todos.db');
 
 db.serialize(function() {
   db.run("CREATE TABLE IF NOT EXISTS users ( \

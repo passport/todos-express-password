@@ -1,8 +1,9 @@
 .env
-
-# Mac OS X
-.DS_Store
+var
 
 # Node.js
 node_modules/
-npm-debug.log
+npm-debug.log*
+
+# Mac OS X
+.DS_Store
