@@ -1,29 +1,29 @@
 button {
 	display: block;
-  padding: 10px;
+	padding: 10px;
 	width: 100%;
 	border-radius: 3px;
-  background: #d83f45;
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
-  cursor: pointer;
+	background: #d83f45;
+	font-size: 14px;
+	font-weight: 700;
+	color: white;
+	cursor: pointer;
 }
 
 button:hover {
-  background-color: #c83f45;
+	background-color: #c83f45;
 }
 
 form {
-  margin: 0 auto;
-  max-width: 400px;
+	max-width: 400px;
+	margin: 0 auto;
 }
 
 h1 {
-  font-size: 24px;
-  font-weight: 500;
-  margin: 0 0 20px 0;
-  padding: 0 0 5px 0;
+	margin: 0 0 20px 0;
+	padding: 0 0 5px 0;
+	font-size: 24px;
+	font-weight: 500;
 }
 
 input {
