@@ -28,7 +28,7 @@ password.
 
 This app implements the features of a typical [TodoMVC](https://todomvc.com/)
 app, and adds sign in functionality.  This app is a traditional web application,
-in which all application logic and data persitence is handled on the server.
+in which all application logic and data persistence is handled on the server.
 
 User interaction is performed via HTML pages and forms, which are rendered via
 [EJS](https://ejs.co/) templates and styled with vanilla CSS.  Data is stored in
