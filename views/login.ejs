@@ -18,7 +18,6 @@
 					<p>Goodbye two</p>
 					<% messages.forEach(function(message) { %>
 					<p><%= message %></p>
-					<p><%= message %></p>
 					<% }); %>
 				</section>
 				<% } %>
@@ -28,7 +27,7 @@
 				</section>
 				<section>
 					<label for="current-password">Password</label>
-					<input id="current-password" name="password" type="password" autocomplete="current-password" required />
+					<input id="current-password" name="password" type="password" autocomplete="current-password" required>
 				</section>
 				<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 				<button type="submit">Sign in</button>
