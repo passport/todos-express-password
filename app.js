@@ -16,9 +16,7 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
-// WIP: messages styling
 // WIP: logo on login
-// WIP: messages on sign up
 // WIP: ensuring logout and session cleanup
 
 // view engine setup
