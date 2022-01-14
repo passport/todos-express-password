@@ -17,8 +17,6 @@
 }
 
 .todohome section {
-	position: relative;
-	margin: 0;
 	padding-top: 1px;
 	text-align: center;
 }
@@ -31,11 +29,11 @@
 
 .todohome .button {
 	padding: 13px 45px;
-	border-radius: 5px;
-	background: #d83f45;
 	font-size: 16px;
 	font-weight: 500;
 	color: white;
+	border-radius: 5px;
+	background: #d83f45;
 }
 
 .todohome a.button {
