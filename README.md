@@ -7,8 +7,8 @@ Use this example as a starting point for your own web applications.
 To run this app, clone the repository and install dependencies:
 
 ```bash
-$ git clone https://github.com/passport/express-4.x-local-example.git
-$ cd express-4.x-local-example
+$ git clone https://github.com/passport/todos-express-local.git
+$ cd todos-express-local
 $ npm install
 ```
 
