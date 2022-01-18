@@ -1,5 +1,5 @@
 {
-  "name": "todos-express-local",
+  "name": "todos-express-password",
   "version": "0.0.0",
   "private": true,
   "description": "Todo app using Express, Passport, and SQLite for sign in with username and password.",
@@ -14,13 +14,13 @@
     "email": "jaredhanson@gmail.com",
     "url": "https://www.jaredhanson.me/"
   },
-  "homepage": "https://github.com/passport/todos-express-local",
+  "homepage": "https://github.com/passport/todos-express-password",
   "repository": {
     "type": "git",
-    "url": "git://github.com/passport/todos-express-local.git"
+    "url": "git://github.com/passport/todos-express-password.git"
   },
   "bugs": {
-    "url": "https://github.com/passport/todos-express-local/issues"
+    "url": "https://github.com/passport/todos-express-password/issues"
   },
   "funding": {
     "type": "github",

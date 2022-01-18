@@ -1,4 +1,4 @@
-# todos-express-local
+# todos-express-password
 
 This app illustrates how to use [Passport](https://www.passportjs.org/) with
 [Express](https://expressjs.com/) to sign users in with a username and password.
@@ -9,8 +9,8 @@ Use this example as a starting point for your own web applications.
 To run this app, clone the repository and install dependencies:
 
 ```bash
-$ git clone https://github.com/passport/todos-express-local.git
-$ cd todos-express-local
+$ git clone https://github.com/passport/todos-express-password.git
+$ cd todos-express-password
 $ npm install
 ```
 
