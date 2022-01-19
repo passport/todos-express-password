@@ -1,5 +1,6 @@
 .prompt {
-	margin: 50px;
+	max-width: 400px;
+	margin: 50px auto;
 	padding: 25px;
 	background: #fff;
 	border: 1px solid #e6e6e6;
@@ -16,6 +17,24 @@ button {
 	font-weight: 700;
 	color: white;
 	cursor: pointer;
+}
+
+a.button {
+	box-sizing: border-box;
+	display: block;
+	padding: 10px;
+	width: 100%;
+	border-radius: 3px;
+	background: #000;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	text-decoration: none;
+	color: white;
+}
+
+a.google {
+	background: #4787ed;
 }
 
 button:hover {
@@ -35,11 +54,6 @@ h3 {
 	font-weight: 300;
 	text-align: center;
 	color: #b83f45;
-}
-
-form {
-	max-width: 400px;
-	margin: 0 auto;
 }
 
 form section {
