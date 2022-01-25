@@ -22,6 +22,11 @@ $ npm start
 
 Navigate to [`http://localhost:3000`](http://localhost:3000).
 
+## Tutorial
+
+Follow along with the step-by-step [Username & Password Tutorial](https://www.passportjs.org/tutorials/password/)
+to learn how this app was built.
+
 ## Overview
 
 This example illustrates how to use Passport and the [`passport-local`](https://www.passportjs.org/packages/passport-local/)
