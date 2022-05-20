@@ -100,8 +100,10 @@ router.post('/login/password', passport.authenticate('local', {
  * This route logs the user out.
  */
 router.post('/logout', function(req, res, next) {
-  req.logout();
-  res.redirect('/');
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 });
 
 /* GET /signup

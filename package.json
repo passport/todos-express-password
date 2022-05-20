@@ -42,7 +42,7 @@
     "http-errors": "~1.6.3",
     "mkdirp": "^1.0.4",
     "morgan": "~1.9.1",
-    "passport": "^0.5.2",
+    "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "pluralize": "^8.0.0",
     "sqlite3": "^5.0.2"
