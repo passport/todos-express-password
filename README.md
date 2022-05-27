@@ -65,8 +65,9 @@ in the database associated with the authenticated user.
 * Add social login.
 
   Study [todos-express-google](https://github.com/passport/todos-express-google)
-  to learn how to let users sign in with their existing social network accounts
-  and avoid the need sign up.
+  to learn how to let users sign in with their social network accounts, using
+  their existing profile and avoiding the need to sign up and repeatedly enter
+  account details.
 
 ## License
 
