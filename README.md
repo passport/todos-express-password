@@ -59,8 +59,8 @@ in the database associated with the authenticated user.
 * Extend with credential management.
 
   Study [todos-express-password-credential-management](https://github.com/passport/todos-express-password-credential-management)
-  to learn how to use the Credential Managment API to help the user store and
-  select their password.
+  to learn how to use the [Credential Managment](https://www.w3.org/TR/credential-management-1/)
+  API to help the user store and select their password.
 
 * Add social login.
 
