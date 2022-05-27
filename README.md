@@ -54,6 +54,20 @@ When the server receives a request, it authenticates the cookie and restores the
 login session, thus authenticating the user.  It then accesses or stores records
 in the database associated with the authenticated user.
 
+## Next Steps
+
+* Extend with credential management.
+
+  Study [todos-express-password-credential-management](https://github.com/passport/todos-express-password-credential-management)
+  to learn how to use the Credential Managment API to help the user store and
+  select their password.
+
+* Add social login.
+
+  Study [todos-express-google](https://github.com/passport/todos-express-google)
+  to learn how to let users sign in with their existing social network accounts
+  and avoid the need sign up.
+
 ## License
 
 [The Unlicense](https://opensource.org/licenses/unlicense)
