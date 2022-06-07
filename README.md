@@ -69,6 +69,11 @@ in the database associated with the authenticated user.
   their existing profile and avoiding the need to sign up and repeatedly enter
   account details.
 
+* Add passwordless.
+
+  Study [todos-express-webauthn](https://github.com/passport/todos-express-webauthn)
+  to learn how to let users sign in with biometrics or a security key.
+
 ## License
 
 [The Unlicense](https://opensource.org/licenses/unlicense)
