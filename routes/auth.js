@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
+var bcrypt = require('bcrypt');
 var db = require('../db');
 
 
@@ -128,13 +129,11 @@ router.get('/signup', function(req, res, next) {
  * successfully created, the user is logged in.
  */
 router.post('/signup', function(req, res, next) {
-  var salt = crypto.randomBytes(16);
-  crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+  bcrypt.hash(req.body.password, 12, function(err, hashedPassword) {
     if (err) { return next(err); }
-    db.run('INSERT INTO users (username, hashed_password, salt) VALUES (?, ?, ?)', [
+    db.run('INSERT INTO users (username, hashed_password) VALUES (?, ?)', [
       req.body.username,
-      hashedPassword,
-      salt
+      hashedPassword
     ], function(err) {
       if (err) { return next(err); }
       var user = {
