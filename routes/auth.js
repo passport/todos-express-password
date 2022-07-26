@@ -3,6 +3,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
 var bcrypt = require('bcrypt');
+var argon2 = require('argon2');
 var db = require('../db');
 
 
@@ -129,23 +130,27 @@ router.get('/signup', function(req, res, next) {
  * successfully created, the user is logged in.
  */
 router.post('/signup', function(req, res, next) {
-  bcrypt.hash(req.body.password, 12, function(err, hashedPassword) {
-    if (err) { return next(err); }
-    db.run('INSERT INTO users (username, hashed_password) VALUES (?, ?)', [
-      req.body.username,
-      hashedPassword
-    ], function(err) {
-      if (err) { return next(err); }
-      var user = {
-        id: this.lastID,
-        username: req.body.username
-      };
-      req.login(user, function(err) {
+  // https://mailarchive.ietf.org/arch/msg/kitten/0Uj5lF3dzADDqXpXGxcTBBDXfoM/
+  argon2.hash(req.body.password, { timeCost: 3, memoryCost: 1024 * 64 })
+    .then(function(hashedPassword) {
+      db.run('INSERT INTO users (username, hashed_password) VALUES (?, ?)', [
+        req.body.username,
+        hashedPassword
+      ], function(err) {
         if (err) { return next(err); }
-        res.redirect('/');
+        var user = {
+          id: this.lastID,
+          username: req.body.username
+        };
+        req.login(user, function(err) {
+          if (err) { return next(err); }
+          res.redirect('/');
+        });
       });
+    })
+    .catch(function(err) {
+      return next(err);
     });
-  });
 });
 
 module.exports = router;
