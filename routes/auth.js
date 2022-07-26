@@ -22,9 +22,9 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
     if (err) { return cb(err); }
     if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
     
-    crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+    bcrypt.compare(password, row.hashed_password, function(err, result) {
       if (err) { return cb(err); }
-      if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
+      if (!result) {
         return cb(null, false, { message: 'Incorrect username or password.' });
       }
       return cb(null, row);
