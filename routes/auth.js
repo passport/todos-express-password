@@ -23,13 +23,16 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
     if (err) { return cb(err); }
     if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
     
-    bcrypt.compare(password, row.hashed_password, function(err, result) {
-      if (err) { return cb(err); }
-      if (!result) {
-        return cb(null, false, { message: 'Incorrect username or password.' });
-      }
-      return cb(null, row);
-    });
+    argon2.verify(row.hashed_password, password)
+      .then(function(result) {
+        if (!result) {
+          return cb(null, false, { message: 'Incorrect username or password.' });
+        }
+        return cb(null, row);
+      })
+      .catch(function(err) {
+        return cb(err);
+      });
   });
 }));
 
