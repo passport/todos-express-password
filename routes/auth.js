@@ -21,7 +21,7 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
     if (err) { return cb(err); }
     if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
     
-    crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+    crypto.scrypt(password, row.salt, 32, function(err, hashedPassword) {
       if (err) { return cb(err); }
       if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
         return cb(null, false, { message: 'Incorrect username or password.' });
@@ -129,7 +129,7 @@ router.get('/signup', function(req, res, next) {
  */
 router.post('/signup', function(req, res, next) {
   var salt = crypto.randomBytes(16);
-  crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+  crypto.scrypt(req.body.password, salt, 32, function(err, hashedPassword) {
     if (err) { return next(err); }
     db.run('INSERT INTO users (username, hashed_password, salt) VALUES (?, ?, ?)', [
       req.body.username,
