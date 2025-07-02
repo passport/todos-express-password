@@ -1,8 +1,8 @@
-var express = require('express');
-var ensureLogIn = require('connect-ensure-login').ensureLoggedIn;
-var db = require('../db');
+const express = require('express');
+const ensureLogIn = require('connect-ensure-login').ensureLoggedIn;
+const db = require('../db');
 
-var ensureLoggedIn = ensureLogIn();
+const ensureLoggedIn = ensureLogIn();
 
 function fetchTodos(req, res, next) {
   db.all('SELECT * FROM todos WHERE owner_id = ?', [
@@ -10,7 +10,7 @@ function fetchTodos(req, res, next) {
   ], function(err, rows) {
     if (err) { return next(err); }
     
-    var todos = rows.map(function(row) {
+    const todos = rows.map(function(row) {
       return {
         id: row.id,
         title: row.title,
@@ -25,7 +25,7 @@ function fetchTodos(req, res, next) {
   });
 }
 
-var router = express.Router();
+const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
