@@ -11,6 +11,10 @@ var logger = require('morgan');
 // allowing it to inherit from session.Store
 var SQLiteStore = require('connect-sqlite3')(session);
 
+
+var sqlite3 = require('sqlite3');
+var mkdirp = require('mkdirp');
+
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 
@@ -27,11 +31,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+mkdirp.sync('./var/db');
+
+var sessionDb = new sqlite3.Database('./var/db/sessions.db');
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false, // don't save session if unmodified
   saveUninitialized: false, // don't create session until something stored
-  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+  store: new SQLiteStore({
+  db: sessionDb
+})
 }));
 app.use(csrf());
 app.use(passport.authenticate('session'));
